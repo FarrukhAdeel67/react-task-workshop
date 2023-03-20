@@ -2,13 +2,16 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import ProductComponent from "./productComponent";
 import { fetchProducts } from "../../store/actions/Home/productActions";
+import { fetchUsers } from "../../store/actions/SignUp/signUpActions";
 const ProductListing = () => {
     // eslint-disable-next-line
     const products = useSelector((state) => state);
-    console.log(products)
+    // console.log(products)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchProducts());
+        dispatch(fetchUsers());
+
         // eslint-disable-next-line
     }, []);
     return (

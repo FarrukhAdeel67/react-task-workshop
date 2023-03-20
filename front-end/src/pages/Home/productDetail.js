@@ -13,6 +13,8 @@ const ProductDetail = () => {
 
     const { productId } = useParams();
     const product = useSelector(state => state.product)
+    const user = useSelector(state=> state.logInUser.loggedInUser)
+
     const dispatch = useDispatch();
     const clickHandler = (e) => {
         dispatch(addToCart(e))

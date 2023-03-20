@@ -4,10 +4,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import Badge from '@mui/material/Badge';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Cart from './cart';
+import types from '../../store/actions/Home/types';
 const Header = () => {
+    const dispatch = useDispatch();
     const getData = useSelector(state => state.cartReducer.carts)
+    const user = useSelector(state=> state.logInUser.loggedInUser)
+    console.log(user)
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -22,6 +26,12 @@ const Header = () => {
                     </Link>
                     <Nav className="mr-auto">
                         <Nav.Link><Link className="text-decoration-none text-light" to='/'>Home</Link></Nav.Link>
+                        <Nav.Link><Link className="text-decoration-none text-light" to='/signUp'>SignUp</Link></Nav.Link>
+                        <Nav.Link>{user ? <Link className="text-decoration-none text-light" to='/logIn' onClick={()=>{
+                            dispatch({
+                                type:types.LOGOUT,
+                            })
+                        }}>logOut</Link> : <Link className="text-decoration-none text-light" to='/logIn'>logIn</Link>}</Nav.Link>
                         <Badge badgeContent={getData.length} color="primary"
                             id="basic-button"
                             aria-controls={open ? 'basic-menu' : undefined}
